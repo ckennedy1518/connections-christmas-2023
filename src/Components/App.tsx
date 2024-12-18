@@ -2,24 +2,17 @@
 // Date: 11-26-23
 
 import React, { useState } from 'react';
-import { PlayerSelect } from "./PlayerSelect";
+import { GameTypeSelect } from "./InitialScreen/GameTypeSelect";
+import { Stage } from "../types";
 
 const App: React.FC = () => {
-    const [currentStage, setCurrentStage] = useState("PlayerSelect");
-
-    const advanceStage = () => {
-        if (currentStage === "PlayerSelect") {
-            setCurrentStage("Playing");
-        }
-        else {
-            setCurrentStage("Finished");
-        }
-    };
+    const [currentStage, setCurrentStage] = useState("GameTypeSelect" as Stage);
 
     return <>
-        {currentStage === "PlayerSelect" && <PlayerSelect stage={currentStage} />}
-        {currentStage === "Playing" && <div></div>}
-        {currentStage === "Finished" && <div></div>}
+        {currentStage === "GameTypeSelect" && <GameTypeSelect setStage={setCurrentStage} />}
+        {currentStage === "Creating" && <div>Creating</div>}
+        {currentStage === "Playing" && <div>Playing</div>}
+        {currentStage === "Finished" && <div>Finished</div>}
     </>;
 }
 
