@@ -2,7 +2,7 @@
 // Date: 12-17-24
 
 import React from 'react';
-import { Color } from '../../types';
+import { Color } from '../../Utilities/types';
 
 interface IPlayerSelectProps {
     color: Color;

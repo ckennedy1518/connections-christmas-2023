@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { GameTypeSelect } from "./InitialScreen/GameTypeSelect";
-import { Stage } from "../types";
+import { Stage } from "../Utilities/types";
 import { CreateEntryPoint } from './Creating/CreateEntryPoint';
 
 const App: React.FC = () => {

@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { OptionButton } from "../Helpers/OptionButton";
-import { Stage } from '../../types';
+import { Stage } from '../../Utilities/types';
 
 interface IPlayerSelectProps {
     setStage: (stage: Stage) => void;
