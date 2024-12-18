@@ -16,5 +16,6 @@ export const CategoryEntry: React.FC<IPlayerSelectProps> = props => {
         <textarea id={color + "2"} />
         <textarea id={color + "3"} />
         <textarea id={color + "4"} />
+        <textarea id={color + "5"} />
     </>;
 }
