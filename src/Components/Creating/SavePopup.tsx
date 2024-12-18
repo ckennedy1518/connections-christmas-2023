@@ -14,24 +14,26 @@ interface IPlayerSelectProps {
 export const SavePopup: React.FC<IPlayerSelectProps> = props => {
     const { setStage } = props;
     let [showModal, setShowModal] = useState(true);
-    let saveResult: SaveResult | null = null;
+    const [saveResult, setSaveResult] = useState(SaveResult.NotCalledYet);
     let savePopupId = "savePopupId";
 
     const onGoBackClick = () => setShowModal(false);
-    const onSaveClick = useCallback(() => {
-        saveResult = saveGame(savePopupId);
+    const onSaveClick = useCallback(async () => {
+        setSaveResult(await saveGame(savePopupId));
         if (saveResult === SaveResult.Good) {
+            setShowModal(false);
             setStage("GameTypeSelect");
         }
-    }, []);
+    }, [saveResult]);
 
     return (
         <Modal isOpen={showModal} onClose={() => {}}>
             <textarea onTouchEnd={onSaveClick} id={savePopupId} />
             <OptionButton onClick={onGoBackClick} caption="Go Back" cssClass="" />
             <OptionButton onClick={onSaveClick} caption="Save" cssClass="" />
-            {saveResult === SaveResult.FileAlreadyExists && "That name is already taken"}
-            {saveResult === SaveResult.BadString && "That file name is not valid"}
+            {saveResult === SaveResult.FileAlreadyExists && "That name is already taken."}
+            {saveResult === SaveResult.BadString && "That file name is not valid."}
+            {saveResult === SaveResult.BadCharacter && "You cannot use \".\", \"\\\" or \"/\" in the save name."}
         </Modal>
     );
 }

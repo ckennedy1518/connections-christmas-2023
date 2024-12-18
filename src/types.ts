@@ -5,6 +5,8 @@ export type Stage = "GameTypeSelect" | "Creating" | "Previewing" | "Playing" | "
 export type Color = "Yellow" | "Green" | "Blue" | "Purple";
 export enum SaveResult {
     BadString,
+    BadCharacter,
     FileAlreadyExists,
     Good,
+    NotCalledYet,
 }
