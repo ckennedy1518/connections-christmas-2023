@@ -34,7 +34,7 @@ export const CreateEntryPoint: React.FC<IPlayerSelectProps> = props => {
                 setShowCantSave(false);
             }, 5000);
         }
-    }, [showCantSave]);    
+    }, []);    
 
     return <>
         Yellow:
@@ -52,7 +52,7 @@ export const CreateEntryPoint: React.FC<IPlayerSelectProps> = props => {
         <OptionButton onClick={onGoBackClick} caption="Go back" cssClass="" />
         <OptionButton onClick={onPreviewClick} caption="Preview" cssClass="" />
         <OptionButton onClick={onSaveClick} caption="Save" cssClass="" />
-        {savePopupOpen && <SavePopup setStage={setStage} saveString={saveString} />}
+        {savePopupOpen && <SavePopup setStage={setStage} showPopup={setSavePopupOpen} saveString={saveString} />}
         {showCantSave && "Fill out all fields with unique values before saving."}
     </>;
 }

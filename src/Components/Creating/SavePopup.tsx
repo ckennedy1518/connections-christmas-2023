@@ -9,29 +9,33 @@ import { saveGame } from '../../functions/save-game';
 
 interface IPlayerSelectProps {
     setStage: (stage: Stage) => void;
+    showPopup: (value: boolean) => void;
     saveString: string;
 }
 
 export const SavePopup: React.FC<IPlayerSelectProps> = props => {
-    const { setStage, saveString } = props;
-    let [showModal, setShowModal] = useState(true);
+    const { setStage, saveString, showPopup } = props;
+    const [showModal, setShowModal] = useState(true);
     const [saveResult, setSaveResult] = useState(SaveResult.NotCalledYet);
-    let savePopupId = "savePopupId";
+    const SAVE_POPUP_ID = "savePopupId";
 
-    const onGoBackClick = () => setShowModal(false);
+    const onGoBackClick = () => {
+        setShowModal(false);
+        showPopup(false);
+    };
     const onSaveClick = useCallback(async () => {
-        const result = await saveGame(savePopupId, saveString) 
+        const result = await saveGame(SAVE_POPUP_ID, saveString) 
         if (result === SaveResult.Good) {
             setShowModal(false);
             setStage("GameTypeSelect");
         } else {
             setSaveResult(result);
         }
-    }, [saveResult]);
+    }, [saveString, setStage]);
 
     return (
         <Modal isOpen={showModal} onClose={() => {}}>
-            <textarea onTouchEnd={onSaveClick} id={savePopupId} />
+            <textarea onTouchEnd={onSaveClick} id={SAVE_POPUP_ID} />
             <OptionButton onClick={onGoBackClick} caption="Go Back" cssClass="" />
             <OptionButton onClick={onSaveClick} caption="Save" cssClass="" />
             {saveResult === SaveResult.FileAlreadyExists && "That name is already taken."}
