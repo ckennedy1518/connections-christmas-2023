@@ -1,8 +1,8 @@
 // Author: Christopher Kennedy
 // Date: 12-17-24
 
-import { CSV_HEADER } from "../../Utilities/constants";
-import { Color } from "../../Utilities/types";
+import { CSV_HEADER } from "../Utilities/constants";
+import { Color } from "../Utilities/types";
 
 /**
  * Makes sure the built content is valid before offering chance to save.

@@ -7,7 +7,7 @@ import { Color, Stage } from '../../Utilities/types';
 import { CategoryEntry } from './CategoryEntry';
 import { VerticalSpacer } from '../Helpers/VerticalSpacer';
 import { SavePopup } from './SavePopup';
-import { getCsvFormat } from '../../functions/helpers/get-csv-format';
+import { getCsvFormat } from '../../functions/get-csv-format';
 
 interface IPlayerSelectProps {
     setStage: (stage: Stage) => void;
