@@ -13,7 +13,7 @@ export const GameTypeSelect: React.FC<IPlayerSelectProps> = props => {
     const { setStage } = props;
 
     const onCreateGameClick = () => { setStage("Creating"); }
-    const onPlayClick = () => { setStage("Playing"); }
+    const onPlayClick = () => { setStage("PlayEntry"); }
     
     return <>
         <OptionButton onClick={onCreateGameClick} caption="Create a game" cssClass="" />

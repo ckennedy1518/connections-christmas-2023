@@ -45,6 +45,31 @@ app.post('/api/files', (req, res) => {
   });
 });
 
+// Endpoint to get the contents of a file
+app.get('/api/files/:fileName', (req, res) => {
+  const { fileName } = req.params;
+
+  if (!fileName) {
+    return res.status(400).json({ error: 'File name is required' });
+  }
+
+  const filePath = path.join(directoryPath, fileName);
+
+  // Check if the file exists
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: 'File not found' });
+  }
+
+  // Read the file contents
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).json({ error: 'Failed to read file' });
+    }
+    res.status(200).json({ content: data });
+  });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
