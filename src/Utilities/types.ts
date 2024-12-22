@@ -17,5 +17,12 @@ export enum SaveResult {
     FailedToCreateFile,
     NoGameFound,
 }
-export type Category = [value1: string, value2: string, value3: string, value4: string, categoryDesc: string];
+export type Category = {
+    value1: string,
+    value2: string,
+    value3: string,
+    value4: string,
+    categoryDesc: string,
+    color: Color,
+};
 export type Values = [yellow: Category, green: Category, blue: Category, purple: Category];
