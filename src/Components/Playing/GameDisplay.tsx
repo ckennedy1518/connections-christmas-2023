@@ -16,9 +16,10 @@ interface IGameDisplayProps {
 export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const { values, setStage } = props;
     const [selected, setSelected] = useState([] as number[]);
-    const [order, setOrder] = useState(shuffleOrder(16, selected, setSelected));
+    const [order, setOrder] = useState(shuffleOrder(16, selected));
     const submitButtonCSS = useRef<string>("");
     const [correctSoFar, setCorrectSoFar] = useState([] as Category[]);
+    const [isOneAway, setIsOneAway] = useState(false);
 
 
     const onGoBackClick = () => { setStage("PlayEntry"); };
@@ -26,10 +27,13 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
         setSelected([]);
     };
     const onShuffleClick = useCallback(() => {
-        setOrder(shuffleOrder(16 - correctSoFar.length * 4, selected, setSelected));
+        setOrder(shuffleOrder(16 - correctSoFar.length * 4, selected));
     }, [correctSoFar.length, selected]);
     const onSubmitClick = () => {
-        guess(selected, values);
+        guess(selected, values, correctSoFar, setCorrectSoFar, setIsOneAway, setSelected, setOrder);
+        if (correctSoFar.length === 4) {
+            setStage("Finished");
+        }
     };
 
     useEffect(() => {
@@ -44,6 +48,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
             <OptionButton onClick={onDeselectAllClick} caption="Deselect all" cssClass="" />
             <OptionButton onClick={onShuffleClick} caption="Shuffle" cssClass="" />
             <OptionButton onClick={onSubmitClick} caption="Submit" cssClass={submitButtonCSS.current} />
+            {isOneAway && "One away!"}
         </div>
     );
 }

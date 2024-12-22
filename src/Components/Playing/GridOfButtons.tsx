@@ -23,7 +23,7 @@ export const GridOfButtons: React.FC<IGameDisplayProps> = props => {
                 return <CorrectColor category={category} />;
             })}
 
-            <DisplayRemainingValues values={values} selected={selected} setSelected={setSelected} order={order} />
+            <DisplayRemainingValues values={values} selected={selected} setSelected={setSelected} order={order} correctSoFar={correctSoFar} />
         </div>
     );
 }

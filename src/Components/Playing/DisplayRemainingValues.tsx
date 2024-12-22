@@ -2,7 +2,7 @@
 // Date: 12-22-24
 
 import React, { useCallback, useState } from 'react';
-import { Values } from '../../Utilities/types';
+import { Category, Values } from '../../Utilities/types';
 import { OptionButton } from '../Helpers/OptionButton';
 import { getValuesInStringList } from './Helpers/get-values-in-string-list';
 import "../../Styles/_Buttons.css"
@@ -12,10 +12,11 @@ interface IDisplayRemainingValuesProps {
     selected: number[];
     setSelected: (selected: number[]) => void;
     order: number[];
+    correctSoFar: Category[];
 }
 
 export const DisplayRemainingValues: React.FC<IDisplayRemainingValuesProps> = props => {
-    const { values, selected, setSelected, order } = props;
+    const { values, selected, setSelected, order, correctSoFar } = props;
 
     // index represents the non-randomized value so we can check if guess is correct
     // we account later for if yellow/green/some other category has already been guessed correctly.
@@ -32,7 +33,7 @@ export const DisplayRemainingValues: React.FC<IDisplayRemainingValuesProps> = pr
     }, [selected, setSelected]);
 
     // This is a mapping between the randomized values and the value we should be displaying.
-    const valsToDisplayInButtons = getValuesInStringList(values);
+    const valsToDisplayInButtons = getValuesInStringList(values, correctSoFar);
     if (order.length !== valsToDisplayInButtons.length) {
         return null;
     }
