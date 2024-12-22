@@ -1,7 +1,7 @@
 // Author: Christopher Kennedy
 // Date: 12-22-24
 
-export function shuffleOrder(length: number, selected: number[], setSelected: (selected: number[]) => void): number[] {
+export function shuffleOrder(length: number, selected: number[]): number[] {
     if (length % 4 !== 0 || length > 16) {
         return [];
     }

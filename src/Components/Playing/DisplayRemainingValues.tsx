@@ -1,7 +1,7 @@
 // Author: Christopher Kennedy
 // Date: 12-22-24
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Category, Values } from '../../Utilities/types';
 import { OptionButton } from '../Helpers/OptionButton';
 import { getValuesInStringList } from './Helpers/get-values-in-string-list';
@@ -26,6 +26,11 @@ export const DisplayRemainingValues: React.FC<IDisplayRemainingValuesProps> = pr
             // de-selecting
             toSetSelected = selected.filter(num => num !== index);
         } else {
+            // only 4 guesses can be selected at once
+            if (selected.length === 4) {
+                return;
+            }
+
             // need this rather than push with mutability for re-rendering
             toSetSelected = [...selected, index];
         }

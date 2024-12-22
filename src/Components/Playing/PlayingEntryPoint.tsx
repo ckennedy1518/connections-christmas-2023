@@ -5,7 +5,6 @@ import React, { useCallback, useState } from 'react';
 import { SaveResult, Stage, Values } from '../../Utilities/types';
 import { OptionButton } from '../Helpers/OptionButton';
 import { getGameValues } from '../../functions/get-game-values';
-import { GameDisplay } from './GameDisplay';
 
 interface IPlayingEntryPointProps {
     setStage: (stage: Stage) => void;
@@ -22,10 +21,10 @@ export const PlayingEntryPoint: React.FC<IPlayingEntryPointProps> = props => {
         const text = document.getElementById(GAME_SELECT_TEXTBOX_ID) as HTMLTextAreaElement;
         const fileName = text?.value;
         callBackHelper(fileName, setValues, setApiResult, setStage);
-    }, []);
+    }, [setStage, setValues]);
     const onDefaultClick = useCallback(async () => {
         callBackHelper("Default", setValues, setApiResult, setStage);
-    }, []);
+    }, [setStage, setValues]);
 
     return <>
         What game would you like to play?
