@@ -1,11 +1,12 @@
 // Author: Christopher Kennedy
 // Date: 12-19-24
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Category, Stage, Values } from '../../Utilities/types';
 import { OptionButton } from '../Helpers/OptionButton';
 import { shuffleOrder } from '../../functions/shuffle-order';
 import { GridOfButtons } from './GridOfButtons';
+import { guess } from '../../functions/guess';
 
 interface IGameDisplayProps {
     values: Values;
@@ -14,8 +15,8 @@ interface IGameDisplayProps {
 
 export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const { values, setStage } = props;
-    const [order, setOrder] = useState(shuffleOrder(16));
     const [selected, setSelected] = useState([] as number[]);
+    const [order, setOrder] = useState(shuffleOrder(16, selected, setSelected));
     const submitButtonCSS = useRef<string>("");
     const [correctSoFar, setCorrectSoFar] = useState([] as Category[]);
 
@@ -24,11 +25,11 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const onDeselectAllClick = () => {
         setSelected([]);
     };
-    const onShuffleClick = () => {
-        setOrder(shuffleOrder(16 - correctSoFar.length * 4));
-    };
+    const onShuffleClick = useCallback(() => {
+        setOrder(shuffleOrder(16 - correctSoFar.length * 4, selected, setSelected));
+    }, [correctSoFar.length, selected]);
     const onSubmitClick = () => {
-        // TODO: guess
+        guess(selected, values);
     };
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     return (
         <div>
             <GridOfButtons values={values} correctSoFar={correctSoFar} selected={selected} setSelected={setSelected} order={order} />
+
             <OptionButton onClick={onGoBackClick} caption="Return to game select" cssClass="" />
             <OptionButton onClick={onDeselectAllClick} caption="Deselect all" cssClass="" />
             <OptionButton onClick={onShuffleClick} caption="Shuffle" cssClass="" />
