@@ -7,29 +7,23 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Enable CORS to allow requests from the React app
 app.use(cors());
 // Middleware to parse JSON requests
 app.use(express.json());
 
-// Serve React frontend
-app.use(express.static(path.join(__dirname, 'client/build')));
+const directoryPath = path.join(__dirname, '../client/src/Games');
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
-const directoryPath = path.join(__dirname, '../src/Games');
-
-// API endpoint to list files in Games
+// API endpoint to list files in the Games directory
 app.get('/api/files', (req, res) => {
   fs.readdir(directoryPath, (err, files) => {
-    if (err) {
-      return res.status(500).json({ error: 'Unable to scan directory' });
-    }
-    res.json(files);
+      if (err) {
+          console.error('Error reading directory:', err);  // Log detailed error
+          return res.status(500).json({ error: 'Unable to scan directory', details: err.message });
+      }
+      res.json(files);  // Send files as JSON response
   });
 });
 
@@ -75,6 +69,13 @@ app.get('/api/files/:fileName', (req, res) => {
     }
     res.status(200).json({ content: data });
   });
+});
+
+// Serve React frontend
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // Start the server

@@ -12,7 +12,7 @@ export const Mistakes: React.FC<IMistakesProps> = props => {
     const { mistakesRemaining } = props;
     
     // This is yuck, but I am tired and don't want to research react syntax
-    let mistakeDots = null;
+    let mistakeDots: JSX.Element | null = null;
     switch (mistakesRemaining) {
         case (1):
             mistakeDots = <span className="_mistakeDot"></span>;
