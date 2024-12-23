@@ -12,7 +12,7 @@ export function getValuesFromCSV(fileContents: string): Values {
 
     const commaSeparatedValues = headerAndValues[1];
     const splitValues = commaSeparatedValues.split(",");
-    if (splitValues.length !== 20) {
+    if (splitValues.length < 20) {
         return getDummyValues();
     }
 
