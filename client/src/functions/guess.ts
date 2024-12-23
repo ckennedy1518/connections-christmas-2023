@@ -27,20 +27,23 @@ export function guess(selected: number[],
 
     const counts = getGuessCountForEachColor(selected, correctColors);
 
+    let shouldDecrementMistakes = true;
     counts.forEach((count, index) => {
         if (count === 4) {
             const nowCorrect = [...correctSoFar, values[index]];
             setCorrectSoFar(nowCorrect);
             setSelected([]);
             setOrder(shuffleOrder(16 - 4 * nowCorrect.length, []));
+            shouldDecrementMistakes = false;
         } else if (count === 3) {
             setOneAway(true);
             setTimeout(() => {
                 setOneAway(false);
             }, 3000);
-            setMistakesRemaining(mistakesRemaining - 1);
-        } else {
-            setMistakesRemaining(mistakesRemaining - 1);
         }
     });
+
+    if (shouldDecrementMistakes) {
+        setMistakesRemaining(mistakesRemaining - 1);
+    }
 }
