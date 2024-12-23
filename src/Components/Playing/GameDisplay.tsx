@@ -9,6 +9,7 @@ import { GridOfButtons } from './GridOfButtons';
 import { guess } from '../../functions/guess';
 import "../../Styles/_Buttons.css";
 import { VerticalSpacer } from '../Helpers/VerticalSpacer';
+import { Mistakes } from './Mistakes';
 
 interface IGameDisplayProps {
     values: Values;
@@ -23,6 +24,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const [correctSoFar, setCorrectSoFar] = useState([] as Category[]);
     const [isOneAway, setIsOneAway] = useState(false);
     const [shouldShowSubmittedError, setShouldShowSubmittedError] = useState(false);
+    const [mistakesRemaining, setMistakesRemaining] = useState(4);
 
     const onGoBackClick = () => { setStage("PlayEntry"); };
     const onDeselectAllClick = () => {
@@ -31,7 +33,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const onShuffleClick = useCallback(() => {
         setOrder(shuffleOrder(16 - correctSoFar.length * 4, selected));
     }, [correctSoFar.length, selected]);
-    const onSubmitClick = () => {
+    const onSubmitClick = useCallback(() => {
         if (!canSelectSubmitButton) {
             setShouldShowSubmittedError(true);
             setTimeout(() => {
@@ -40,8 +42,8 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
             return;
         }
 
-        guess(selected, values, correctSoFar, setCorrectSoFar, setIsOneAway, setSelected, setOrder);
-    };
+        guess(selected, values, correctSoFar, mistakesRemaining, setCorrectSoFar, setIsOneAway, setSelected, setOrder, setMistakesRemaining);
+    }, [canSelectSubmitButton, correctSoFar, mistakesRemaining, selected, values]);
 
     useEffect(() => {
         // don't allow selection during one away for timing displaying the result of guesses.
@@ -53,13 +55,21 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     return (
         <div>
             <GridOfButtons values={values} correctSoFar={correctSoFar} selected={selected} setSelected={setSelected} order={order} />
-            <VerticalSpacer height={10} />
-            <div className="_gameButtons">
-                <OptionButton onClick={onGoBackClick} caption="Return to game select" cssClass="_navigationButton" />
-                <OptionButton onClick={onDeselectAllClick} caption="Deselect all" cssClass="_navigationButton" />
-                <OptionButton onClick={onShuffleClick} caption="Shuffle" cssClass="_navigationButton" />
-                <OptionButton onClick={onSubmitClick} caption="Submit" cssClass="_navigationButton" />
-            </div>
+            <VerticalSpacer height={20} />
+            <Mistakes mistakesRemaining={mistakesRemaining} />
+            <VerticalSpacer height={20} />
+            {mistakesRemaining !== 0 ? (
+                <div className="_gameButtons">
+                    <OptionButton onClick={onGoBackClick} caption="Return to game select" cssClass="_navigationButton" />
+                    <OptionButton onClick={onDeselectAllClick} caption="Deselect all" cssClass="_navigationButton" />
+                    <OptionButton onClick={onShuffleClick} caption="Shuffle" cssClass="_navigationButton" />
+                    <OptionButton onClick={onSubmitClick} caption="Submit" cssClass="_navigationButton" />
+                </div>
+            ) : (
+                <div className="_gameButtons">
+                    <OptionButton onClick={onGoBackClick} caption="Return to game select" cssClass="_navigationButton" />
+                </div>
+            )}
             {isOneAway && <span className="_saveErrorMessage">One away!</span>}
             <VerticalSpacer height={3} />
             {shouldShowSubmittedError && <span className="_saveErrorMessage">You must select four values to submit.</span>}

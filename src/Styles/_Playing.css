@@ -68,3 +68,23 @@
     font-family: 'nyt franklin', Arial;
     justify-content: center;
 }
+
+._mistakeDot {
+    background-color: rgb(90, 89, 78);
+    border-radius: 9999px;
+    border: none;
+    height: 16px;
+    width: 16px;
+}
+
+._rightPadding {
+    padding-right: 8px;
+}
+
+._mistakesLabel {
+    font-family: 'nyt franklin', Arial;
+    font-size: 16px;
+    color: rgb(90, 89, 78);
+    font-weight: 500;
+    padding-right: 10px;
+}

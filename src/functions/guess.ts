@@ -9,10 +9,12 @@ import { shuffleOrder } from "./shuffle-order";
 export function guess(selected: number[],
     values: Values,
     correctSoFar: Category[],
+    mistakesRemaining: number,
     setCorrectSoFar: (correctSoFar: Category[]) => void,
     setOneAway: (isOneAway: boolean) => void,
     setSelected: (selected: number[]) => void,
     setOrder: (order: number[]) => void,
+    setMistakesRemaining: (mistakesRemaining: number) => void,
 ): void {
     if (selected.length !== 4) {
         return;
@@ -36,6 +38,9 @@ export function guess(selected: number[],
             setTimeout(() => {
                 setOneAway(false);
             }, 3000);
+            setMistakesRemaining(mistakesRemaining - 1);
+        } else {
+            setMistakesRemaining(mistakesRemaining - 1);
         }
     });
 }
