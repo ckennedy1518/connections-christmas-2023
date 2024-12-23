@@ -23,7 +23,6 @@ export const CreateEntryPoint: React.FC<IPlayerSelectProps> = props => {
     const SPACE_BETWEEN_ENTRIES = 10;
 
     const onGoBackClick = () => { setStage("GameTypeSelect"); };
-    const onPreviewClick = () => { setStage("Previewing"); };
     const onSaveClick = useCallback(() => {
         const validToSave = getCsvFormat(setSaveString);
         if (validToSave) {
@@ -57,7 +56,6 @@ export const CreateEntryPoint: React.FC<IPlayerSelectProps> = props => {
         <VerticalSpacer height={SPACE_BETWEEN_ENTRIES} />
         <div className="_gameButtons">
             <OptionButton onClick={onGoBackClick} caption="Go back" cssClass="_navigationButton" />
-            <OptionButton onClick={onPreviewClick} caption="Preview" cssClass="_navigationButton" />
             <OptionButton onClick={onSaveClick} caption="Save" cssClass="_navigationButton" />
         </div>
         {savePopupOpen && <SavePopup setStage={setStage} showPopup={setSavePopupOpen} saveString={saveString} />}

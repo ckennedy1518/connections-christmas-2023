@@ -1,7 +1,7 @@
 // Author: Christopher Kennedy
 // Date: 12-17-24
 
-export type Stage = "GameTypeSelect" | "Creating" | "Previewing" | "PlayEntry" | "Playing" | "Finished";
+export type Stage = "GameTypeSelect" | "Creating" | "PlayEntry" | "Playing";
 export enum Color {
     Yellow = "Yellow",
     Green = "Green",

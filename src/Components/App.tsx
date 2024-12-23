@@ -16,10 +16,8 @@ const App: React.FC = () => {
     return <>
         {currentStage === "GameTypeSelect" && <GameTypeSelect setStage={setCurrentStage} />}
         {currentStage === "Creating" && <CreateEntryPoint setStage={setCurrentStage} />}
-        {currentStage === "Previewing" && <div>Previewing</div>}
         {currentStage === "PlayEntry" && <PlayingEntryPoint setStage={setCurrentStage} setValues={setValues} />}
         {currentStage === "Playing" && <GameDisplay values={values} setStage={setCurrentStage} />}
-        {currentStage === "Finished" && <div>Finished</div>}
     </>;
 }
 
