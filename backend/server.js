@@ -14,6 +14,13 @@ app.use(cors());
 // Middleware to parse JSON requests
 app.use(express.json());
 
+// Serve React frontend
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 const directoryPath = path.join(__dirname, '../src/Games');
 
 // API endpoint to list files in Games
