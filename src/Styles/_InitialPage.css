@@ -4,10 +4,13 @@
 
 ._background {
     background-color: rgb(179, 167, 254);
+    height: 98vh;
+    width: 98vw;
+    padding-left: 2vh;
 }
 
 ._mainMessage {
-    top: 30%;
+    padding-top: 30vh;
     text-align: center;
     justify-content: center;
     display: flex;

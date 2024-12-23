@@ -43,6 +43,11 @@
     padding-right: 3px;
     padding-top: 3px;
     color: #5f5f5f;
+    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
+}
+
+._blackText {
+    color: rgb(18, 18, 18);
 }
 
 ._descriptionLabel {
@@ -56,10 +61,12 @@
     justify-content: center;
     display: flex;
     color: red;
+    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
 }
 
 ._categoryLabelAndTextArea {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-top: 30vh;
 }

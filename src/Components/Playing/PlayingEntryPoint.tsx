@@ -35,9 +35,9 @@ export const PlayingEntryPoint: React.FC<IPlayingEntryPointProps> = props => {
         callBackHelper("Default", setValues, setApiResult, setStage);
     }, [setStage, setValues]);
 
-    return <>
+    return <div className="_background">
         <div className="_categoryLabelAndTextArea">
-            <span className="_textAreaLabel">What game would you like to play?</span>
+            <span className="_textAreaLabel _blackText">What game would you like to play?</span>
             <textarea id={GAME_SELECT_TEXTBOX_ID} className="_textArea _smallerTextArea" />
         </div>
         <VerticalSpacer height={10} />
@@ -47,10 +47,11 @@ export const PlayingEntryPoint: React.FC<IPlayingEntryPointProps> = props => {
             <OptionButton onClick={onSelectClick} caption="Select" cssClass="_navigationButton" />
             <OptionButton onClick={onDefaultClick} caption="Christopher's Default Game" cssClass="_navigationButton" />
         </div>
-        {apiResult === SaveResult.NoGameFound && "Game not found, please try again."}
-        {apiResult === SaveResult.BadString && "That game is not valid"}
+        <VerticalSpacer height={3} />
+        {apiResult === SaveResult.NoGameFound && <span className="_saveErrorMessage">Game not found, please try again.</span>}
+        {apiResult === SaveResult.BadString && <span className="_saveErrorMessage">That game is not valid.</span>}
         {shouldShowOptions && <ListOfGameOptionsPopup listOfFiles={fileList.current} setShouldShowOptions={setShouldShowOptions} />}
-    </>;
+    </div>;
 }
 
 async function callBackHelper(
