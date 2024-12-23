@@ -5,6 +5,7 @@ import React, { useCallback, useState } from 'react';
 import { SaveResult, Stage, Values } from '../../Utilities/types';
 import { OptionButton } from '../Helpers/OptionButton';
 import { getGameValues } from '../../functions/get-game-values';
+import { VerticalSpacer } from '../Helpers/VerticalSpacer';
 
 interface IPlayingEntryPointProps {
     setStage: (stage: Stage) => void;
@@ -17,7 +18,7 @@ export const PlayingEntryPoint: React.FC<IPlayingEntryPointProps> = props => {
     const GAME_SELECT_TEXTBOX_ID = "gameSelect";
 
     const onGoBackClick = () => { setStage("GameTypeSelect"); };
-    const onSelectClick = useCallback(async () => { 
+    const onSelectClick = useCallback(async () => {
         const text = document.getElementById(GAME_SELECT_TEXTBOX_ID) as HTMLTextAreaElement;
         const fileName = text?.value;
         callBackHelper(fileName, setValues, setApiResult, setStage);
@@ -27,11 +28,16 @@ export const PlayingEntryPoint: React.FC<IPlayingEntryPointProps> = props => {
     }, [setStage, setValues]);
 
     return <>
-        What game would you like to play?
-        <textarea id={GAME_SELECT_TEXTBOX_ID} />
-        <OptionButton onClick={onGoBackClick} caption="Go back" cssClass="" />
-        <OptionButton onClick={onSelectClick} caption="Select" cssClass="" />
-        <OptionButton onClick={onDefaultClick} caption="Christopher's Default Game" cssClass="" />
+        <div className="_categoryLabelAndTextArea">
+            <span className="_textAreaLabel">What game would you like to play?</span>
+            <textarea id={GAME_SELECT_TEXTBOX_ID} className="_textArea _smallerTextArea" />
+        </div>
+        <VerticalSpacer height={10} />
+        <div className="_gameButtons">
+            <OptionButton onClick={onGoBackClick} caption="Go back" cssClass="_navigationButton" />
+            <OptionButton onClick={onSelectClick} caption="Select" cssClass="_navigationButton" />
+            <OptionButton onClick={onDefaultClick} caption="Christopher's Default Game" cssClass="_navigationButton" />
+        </div>
         {apiResult === SaveResult.NoGameFound && "Game not found, please try again."}
         {apiResult === SaveResult.BadString && "That game is not valid"}
     </>;
