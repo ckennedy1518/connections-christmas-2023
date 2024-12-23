@@ -7,7 +7,7 @@
  * @returns True if the file exists, false otherwise
  */
 export async function fileExists(fileName: string): Promise<boolean> {
-    const result = await fetch('http://localhost:5000/api/files');
+    const result = await fetch('https://connections-christmas-2023.onrender.com/api/files');
     if (result.status !== 200) {
         return true; // Don't let them save
     }

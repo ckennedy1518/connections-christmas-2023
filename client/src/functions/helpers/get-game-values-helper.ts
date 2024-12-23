@@ -6,7 +6,7 @@ import { SaveResult, Values } from "../../Utilities/types";
 import { getValuesFromCSV } from "./get-values-from-csv";
 
 export async function getGameValuesHelper(fileName: string, setValues: (values: Values) => void): Promise<SaveResult> {
-    const result = await fetch(`http://localhost:5000/api/files/${fileName}`);
+    const result = await fetch(`https://connections-christmas-2023.onrender.com/api/files/${fileName}`);
     if (result.status !== 200) {
         return SaveResult.NoGameFound;
     }

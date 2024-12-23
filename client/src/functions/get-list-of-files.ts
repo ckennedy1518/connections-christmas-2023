@@ -6,7 +6,7 @@
  * @returns the list of files
  */
 export async function getListOfFiles(): Promise<string[]> {
-    const result = await fetch('http://localhost:5000/api/files');
+    const result = await fetch('https://connections-christmas-2023.onrender.com/api/files');
     if (result.status !== 200) {
         return []; // Don't show them anything
     }
