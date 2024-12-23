@@ -27,6 +27,11 @@
 
 ._textArea {
     resize: none;
+    font-size: 16px;
+}
+
+._smallerTextArea {
+    height: 20px;
 }
 
 ._gameSave {
@@ -34,14 +39,27 @@
     display: flex;
 }
 
-._nameGameLabel {
+._textAreaLabel {
     padding-right: 3px;
-    padding-top: 8px;
-    color: #5f5f5f
+    padding-top: 3px;
+    color: #5f5f5f;
+}
+
+._descriptionLabel {
+    padding-right: 3px;
+    padding-top: 12px;
+    color: rgb(18, 18, 18);
+    font-size: 16px;
 }
 
 ._saveErrorMessage {
     justify-content: center;
     display: flex;
     color: red;
+}
+
+._categoryLabelAndTextArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

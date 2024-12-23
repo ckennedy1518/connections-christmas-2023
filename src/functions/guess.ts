@@ -33,6 +33,9 @@ export function guess(selected: number[],
             setOrder(shuffleOrder(16 - 4 * nowCorrect.length, []));
         } else if (count === 3) {
             setOneAway(true);
+            setTimeout(() => {
+                setOneAway(false);
+            }, 3000);
         }
     });
 }

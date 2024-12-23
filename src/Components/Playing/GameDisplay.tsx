@@ -17,6 +17,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const { values, setStage } = props;
     const [selected, setSelected] = useState([] as number[]);
     const [order, setOrder] = useState(shuffleOrder(16, selected));
+    const canSelectSubmitButton = useRef<boolean>(false);
     const submitButtonCSS = useRef<string>("");
     const [correctSoFar, setCorrectSoFar] = useState([] as Category[]);
     const [isOneAway, setIsOneAway] = useState(false);
@@ -30,6 +31,10 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
         setOrder(shuffleOrder(16 - correctSoFar.length * 4, selected));
     }, [correctSoFar.length, selected]);
     const onSubmitClick = () => {
+        if (!canSelectSubmitButton?.current) {
+            return;
+        }
+
         guess(selected, values, correctSoFar, setCorrectSoFar, setIsOneAway, setSelected, setOrder);
         if (correctSoFar.length === 4) {
             setStage("Finished");
@@ -37,8 +42,19 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     };
 
     useEffect(() => {
-        submitButtonCSS.current = selected.length === 4 ? "_canSelect" : "_cannotSelect";
-    }, [selected]);
+        // don't allow selection during one away for timing displaying the result of guesses.
+        // might be slightly annoying the user has to wait 2 seconds to guess again, but at least they will
+        // be told accurately if their guess was one away.
+        if (canSelectSubmitButton) {
+            canSelectSubmitButton.current = (!isOneAway && selected.length === 4);
+        }
+    }, [selected, isOneAway]);
+
+    useEffect(() => {
+        if (submitButtonCSS) {
+            submitButtonCSS.current = canSelectSubmitButton?.current  ? "_canSelect" : "_cannotSelect";
+        }
+    }, [submitButtonCSS, canSelectSubmitButton]);
     
     return (
         <div>

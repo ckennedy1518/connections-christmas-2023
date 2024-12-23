@@ -25,7 +25,7 @@ export const CreateEntryPoint: React.FC<IPlayerSelectProps> = props => {
     const onGoBackClick = () => { setStage("GameTypeSelect"); };
     const onPreviewClick = () => { setStage("Previewing"); };
     const onSaveClick = useCallback(() => {
-        const validToSave = getCsvFormat(setSaveString)
+        const validToSave = getCsvFormat(setSaveString);
         if (validToSave) {
             setSavePopupOpen(true);
         } else {
@@ -61,6 +61,6 @@ export const CreateEntryPoint: React.FC<IPlayerSelectProps> = props => {
             <OptionButton onClick={onSaveClick} caption="Save" cssClass="_navigationButton" />
         </div>
         {savePopupOpen && <SavePopup setStage={setStage} showPopup={setSavePopupOpen} saveString={saveString} />}
-        {showCantSave && "Fill out all fields with unique values before saving."}
+        {showCantSave && <span className="_saveErrorMessage">Fill out all fields with unique values before saving.</span>}
     </>;
 }
