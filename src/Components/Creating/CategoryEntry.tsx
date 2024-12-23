@@ -11,11 +11,11 @@ interface IPlayerSelectProps {
 export const CategoryEntry: React.FC<IPlayerSelectProps> = props => {
     const { color } = props;
     
-    return <>
-        <textarea id={color + "1"} />
-        <textarea id={color + "2"} />
-        <textarea id={color + "3"} />
-        <textarea id={color + "4"} />
-        <textarea id={color + "5"} />
-    </>;
+    return <div>
+        <textarea id={color + "1"} placeholder="Entry 1" className="_textArea" />
+        <textarea id={color + "2"} placeholder="Entry 2" className="_textArea" />
+        <textarea id={color + "3"} placeholder="Entry 3" className="_textArea" />
+        <textarea id={color + "4"} placeholder="Entry 4" className="_textArea" />
+        <textarea id={color + "5"} placeholder="Category Description" className="_textArea" />
+    </div>;
 }

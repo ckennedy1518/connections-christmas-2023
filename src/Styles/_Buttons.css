@@ -2,12 +2,46 @@
  * Date: 12-22-24
  */
 
+ ._gameButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ }
+
+._navigationButton {
+    color: rgb(18, 18, 18);
+    border-radius: 32px;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
+    background-color: white;
+    border-width: 1px;
+    padding: 15px;
+}
+
+._buttonWrapper {
+    padding-right: 10px;
+}
+
+._navigationButton:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+/* ._navigationButtonSelectable {
+
+}
+
+._navigationButtonCannotSelect {
+
+} */
+
 ._unselectedButton {
-    background-color: azure;
-    color: black;
+    background-color: white;
+    color: rgb(18, 18, 18);
 }
 
 ._selectedButton {
-    background-color: black;
-    color: azure;
+    background-color: rgb(18, 18, 18);
+    color: white;
 }

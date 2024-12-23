@@ -1,0 +1,17 @@
+/* Author: Christopher Kennedy
+ * Date: 12-22-24
+ */
+
+._background {
+    background-color: rgb(179, 167, 254);
+}
+
+._mainMessage {
+    top: 30%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    font-size: 48px;
+    font-weight: 400;
+    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
+}

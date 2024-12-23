@@ -6,6 +6,7 @@ import { OptionButton } from "../Helpers/OptionButton";
 import { SaveResult, Stage } from '../../Utilities/types';
 import { Modal } from '../Helpers/Modal';
 import { saveGame } from '../../functions/save-game';
+import { VerticalSpacer } from '../Helpers/VerticalSpacer';
 
 interface IPlayerSelectProps {
     setStage: (stage: Stage) => void;
@@ -35,10 +36,17 @@ export const SavePopup: React.FC<IPlayerSelectProps> = props => {
 
     return (
         <Modal isOpen={showModal} onClose={() => {}}>
-            <textarea onTouchEnd={onSaveClick} id={SAVE_POPUP_ID} />
-            <OptionButton onClick={onGoBackClick} caption="Go Back" cssClass="" />
-            <OptionButton onClick={onSaveClick} caption="Save" cssClass="" />
-            {saveResult === SaveResult.FileAlreadyExists && "That name is already taken."}
+            <div className="_gameSave">
+                <span className="_nameGameLabel">Name this game:</span>
+                <textarea onTouchEnd={onSaveClick} id={SAVE_POPUP_ID} className="_textArea" />
+            </div>
+            <VerticalSpacer height={10} />
+            <div className="_gameButtons">
+                <OptionButton onClick={onGoBackClick} caption="Go Back" cssClass="_navigationButton" />
+                <OptionButton onClick={onSaveClick} caption="Save" cssClass="_navigationButton" />
+            </div>
+            <VerticalSpacer height={3} />
+            {saveResult === SaveResult.FileAlreadyExists && <span className="_saveErrorMessage">That name is already taken.</span>}
             {saveResult === SaveResult.BadString && "That file name is not valid."}
             {saveResult === SaveResult.BadCharacter && "You cannot use \".\", \"\\\" or \"/\" in the save name."}
             {saveResult === SaveResult.FailedToCreateFile && "Failed to create file. Try again."}

@@ -1,0 +1,47 @@
+/* Author: Christopher Kennedy
+ * Date: 12-22-24
+ */
+
+._yellowBanner {
+    background-color: rgb(249, 223, 109);
+}
+
+._greenBanner {
+    background-color: rgb(160, 195, 90);
+}
+
+._blueBanner {
+    background-color: rgb(176, 196, 239);
+}
+
+._purpleBanner {
+    background-color: rgb(186, 129, 197);
+}
+
+._banner {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    padding-top: 10px;
+}
+
+._textArea {
+    resize: none;
+}
+
+._gameSave {
+    justify-content: center;
+    display: flex;
+}
+
+._nameGameLabel {
+    padding-right: 3px;
+    padding-top: 8px;
+    color: #5f5f5f
+}
+
+._saveErrorMessage {
+    justify-content: center;
+    display: flex;
+    color: red;
+}
