@@ -1,0 +1,14 @@
+/* Author: Christopher Kennedy
+ * Date: 12-22-24
+ */
+
+._flexRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+._centerContent {
+    display: flex;
+    justify-content: center;
+}

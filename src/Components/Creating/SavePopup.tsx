@@ -35,7 +35,7 @@ export const SavePopup: React.FC<IPlayerSelectProps> = props => {
     }, [saveString, setStage]);
 
     return (
-        <Modal isOpen={showModal} onClose={() => {}}>
+        <Modal isOpen={showModal}>
             <div className="_gameSave">
                 <span className="_textAreaLabel">Name this game:</span>
                 <textarea onTouchEnd={onSaveClick} id={SAVE_POPUP_ID} className="_textArea _smallerTextArea" />
