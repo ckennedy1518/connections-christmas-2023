@@ -12,3 +12,59 @@
     display: flex;
     justify-content: center;
 }
+
+._gridOfAllButtons{
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+}
+
+._gridAndCorrectContainer {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-top: 15vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+._correctBannerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 73px;
+    padding-bottom: 5px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    min-width: 630px;
+}
+
+._yellowCorrectBanner {
+    background-color: rgb(249, 223, 109);
+}
+
+._greenCorrectBanner {
+    background-color: rgb(160, 195, 90);
+}
+
+._blueCorrectBanner {
+    background-color: rgb(176, 196, 239);
+}
+
+._purpleCorrectBanner {
+    background-color: rgb(186, 129, 197);
+}
+
+._categoryDescription {
+    font-size: 20px;
+    font-family: 'nyt franklin', Arial;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 12px;
+}
+
+._categoryValuesRight {
+    font-size: 20px;
+    font-family: 'nyt franklin', Arial;
+    justify-content: center;
+}

@@ -11,14 +11,30 @@ interface IGameDisplayProps {
 
 export const CorrectColor: React.FC<IGameDisplayProps> = props => {
     const { category } = props;
+
+    let className = "";
+    switch (category.color) {
+        case ("Yellow"):
+            className = "_yellowCorrectBanner";
+            break;
+        case ("Green"):
+            className = "_greenCorrectBanner";
+            break;
+        case ("Blue"):
+            className = "_blueCorrectBanner";
+            break;
+        case ("Purple"):
+            className = "_purpleCorrectBanner";
+            break;
+    }
     
     return (
-        <div>
-            {category.color}
-            <VerticalSpacer height={10} />
-            {category.categoryDesc}
-            <VerticalSpacer height={10} />
-            {category.value1}, {category.value2}, {category.value3}, {category.value4}
-        </div>
+        <>
+            <div className={className + " _correctBannerContainer"}>
+                <h3 className="_categoryDescription">{category.categoryDesc}</h3>
+                <span className="_categoryValuesRight">{category.value1}, {category.value2}, {category.value3}, {category.value4}</span>
+            </div>
+            <VerticalSpacer height={5} />
+        </>
     );
 }

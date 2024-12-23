@@ -51,7 +51,14 @@ export const DisplayRemainingValues: React.FC<IDisplayRemainingValuesProps> = pr
                     cssClass = "_selectedButton";
                 }
 
-                return <OptionButton onClick={() => onButtonClick(value)} caption={valsToDisplayInButtons[value]} cssClass={cssClass} />;
+                return (
+                    <OptionButton
+                        onClick={() => onButtonClick(value)}
+                        caption={valsToDisplayInButtons[value]}
+                        cssClass={cssClass}
+                        dontApplyButtonWrapper
+                    />
+                );
             })}
         </div>
     );

@@ -18,7 +18,7 @@ export const GridOfButtons: React.FC<IGameDisplayProps> = props => {
     const { values, correctSoFar, selected, setSelected, order } = props;
 
     return (
-        <div>
+        <div className="_gridAndCorrectContainer">
             {correctSoFar.map(category => {
                 return <CorrectColor category={category} />;
             })}

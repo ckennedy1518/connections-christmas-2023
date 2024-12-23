@@ -8,11 +8,13 @@ interface IOptionButtonProps {
     onClick: () => void;
     cssClass: string;
     caption: string;
+    dontApplyButtonWrapper?: boolean;
 }
 
 export const OptionButton: React.FC<IOptionButtonProps> = props => {
-    const { onClick, cssClass, caption } = props;    
-    return <div className="_buttonWrapper">
+    const { onClick, cssClass, caption, dontApplyButtonWrapper } = props;
+    const className = dontApplyButtonWrapper ? "" : "_buttonWrapper"
+    return <div className={className}>
         <button onClick={onClick} className={cssClass}>{caption}</button>
     </div>;
 }

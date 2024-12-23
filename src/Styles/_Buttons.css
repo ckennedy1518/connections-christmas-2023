@@ -10,10 +10,11 @@
 
 ._navigationButton {
     color: rgb(18, 18, 18);
+    border-color: rgb(18, 18, 18);
     border-radius: 32px;
     font-weight: 600;
     font-size: 16px;
-    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
+    font-family: 'nyt franklin', Arial;
     background-color: white;
     border-width: 1px;
     padding: 15px;
@@ -28,20 +29,38 @@
     background-color: whitesmoke;
 }
 
-/* ._navigationButtonSelectable {
-
+._unselectedButton {
+    background-color: rgb(239, 239, 230);
+    color: rgb(18, 18, 18);
+    justify-content: center;
+    padding: 25px;
+    width: 8vw;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'nyt franklin', Arial;
+    border-radius: 6px;
+    border: none;
 }
 
-._navigationButtonCannotSelect {
-
-} */
-
-._unselectedButton {
-    background-color: white;
-    color: rgb(18, 18, 18);
+._unselectedButton:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 220);
 }
 
 ._selectedButton {
-    background-color: rgb(18, 18, 18);
+    background-color: rgb(90, 89, 78);
     color: white;
+    justify-content: center;
+    padding: 25px;
+    width: 8vw;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "nyt franklin", Arial;
+    border-radius: 6px;
+    border: none;
+}
+
+._selectedButton:hover {
+    cursor: pointer;
+    background-color: rgb(99, 98, 85);
 }

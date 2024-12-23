@@ -36,7 +36,7 @@ export const PlayingEntryPoint: React.FC<IPlayingEntryPointProps> = props => {
     }, [setStage, setValues]);
 
     return <div className="_background">
-        <div className="_categoryLabelAndTextArea">
+        <div className="_categoryLabelAndTextArea _largeTopPadding">
             <span className="_textAreaLabel _blackText">What game would you like to play?</span>
             <textarea id={GAME_SELECT_TEXTBOX_ID} className="_textArea _smallerTextArea" />
         </div>

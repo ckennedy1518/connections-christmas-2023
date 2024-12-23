@@ -43,7 +43,7 @@
     padding-right: 3px;
     padding-top: 3px;
     color: #5f5f5f;
-    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
+    font-family: 'nyt franklin', Arial;
 }
 
 ._blackText {
@@ -61,12 +61,15 @@
     justify-content: center;
     display: flex;
     color: red;
-    font-family: 'nyt franklin', Arial, Helvetica, sans-serif;
+    font-family: 'nyt franklin', Arial;
 }
 
 ._categoryLabelAndTextArea {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+._largeTopPadding {
     padding-top: 30vh;
 }
