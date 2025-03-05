@@ -2,7 +2,7 @@
 // Date: 12-19-24
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Category, Stage, Values } from '../../Utilities/types';
+import { Category, Color, Stage, Values } from '../../Utilities/types';
 import { OptionButton } from '../Helpers/OptionButton';
 import { shuffleOrder } from '../../functions/shuffle-order';
 import { GridOfButtons } from './GridOfButtons';
@@ -10,6 +10,7 @@ import { guess } from '../../functions/guess';
 import "../../Styles/_Buttons.css";
 import { VerticalSpacer } from '../Helpers/VerticalSpacer';
 import { Mistakes } from './Mistakes';
+import { reveal } from '../../functions/reveal';
 
 interface IGameDisplayProps {
     values: Values;
@@ -25,6 +26,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const [isOneAway, setIsOneAway] = useState(false);
     const [shouldShowSubmittedError, setShouldShowSubmittedError] = useState(false);
     const [mistakesRemaining, setMistakesRemaining] = useState(4);
+    const [haveAnswersBeenRevealed, setHaveanswersBeenRevealed] = useState(false);
 
     const onGoBackClick = () => { setStage("PlayEntry"); };
     const onDeselectAllClick = () => {
@@ -44,6 +46,18 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
 
         guess(selected, values, correctSoFar, mistakesRemaining, setCorrectSoFar, setIsOneAway, setSelected, setOrder, setMistakesRemaining);
     }, [canSelectSubmitButton, correctSoFar, mistakesRemaining, selected, values]);
+    const onRevealAnswersClick = useCallback(() => {
+        setHaveanswersBeenRevealed(true);
+        let delay = 0;
+        for (const color of Object.values(Color)) {
+            if (!correctSoFar.some(v => v.color === color)) {
+                setTimeout(() => {
+                    reveal(color, values, correctSoFar, setCorrectSoFar, setOrder);
+                }, delay);
+                delay += 1000;
+            }
+        }
+    }, [correctSoFar, values]);
 
     useEffect(() => {
         // don't allow selection during one away for timing displaying the result of guesses.
@@ -58,7 +72,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
             <VerticalSpacer height={20} />
             <Mistakes mistakesRemaining={mistakesRemaining} />
             <VerticalSpacer height={20} />
-            {mistakesRemaining !== 0 ? (
+            {mistakesRemaining > 0 ? (
                 <div className="_gameButtons">
                     <OptionButton onClick={onGoBackClick} caption="Return to game select" cssClass="_navigationButton" />
                     <OptionButton onClick={onDeselectAllClick} caption="Deselect all" cssClass="_navigationButton" />
@@ -68,6 +82,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
             ) : (
                 <div className="_gameButtons">
                     <OptionButton onClick={onGoBackClick} caption="Return to game select" cssClass="_navigationButton" />
+                    {!haveAnswersBeenRevealed && <OptionButton onClick={onRevealAnswersClick} caption="Reveal Answers" cssClass="_navigationButton" />}
                 </div>
             )}
             {isOneAway && <span className="_saveErrorMessage">One away!</span>}

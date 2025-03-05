@@ -38,9 +38,16 @@ export function guess(selected: number[],
             setTimeout(() => {
                 setOneAway(false);
             }, 3000);
+            
             setMistakesRemaining(mistakesRemaining - 1);
+            if (mistakesRemaining === 1) {
+                setSelected([]);
+            }
         } else {
             setMistakesRemaining(mistakesRemaining - 1);
+            if (mistakesRemaining === 1) {
+                setSelected([]);
+            }
         }
     });
 }
