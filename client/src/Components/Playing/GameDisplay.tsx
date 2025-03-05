@@ -11,6 +11,7 @@ import "../../Styles/_Buttons.css";
 import { VerticalSpacer } from '../Helpers/VerticalSpacer';
 import { Mistakes } from './Mistakes';
 import { reveal } from '../../functions/reveal';
+import { getGuessString } from '../../functions/helpers/get-guess-string';
 
 interface IGameDisplayProps {
     values: Values;
@@ -25,8 +26,10 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
     const [correctSoFar, setCorrectSoFar] = useState([] as Category[]);
     const [isOneAway, setIsOneAway] = useState(false);
     const [shouldShowSubmittedError, setShouldShowSubmittedError] = useState(false);
+    const [shouldShowAlreadyGuessedError, setShouldShowAlreadyGuessedError] = useState(false);
     const [mistakesRemaining, setMistakesRemaining] = useState(4);
     const [haveAnswersBeenRevealed, setHaveanswersBeenRevealed] = useState(false);
+    const [guesses, setGuesses] = useState([] as string[]);
 
     const onGoBackClick = () => { setStage("PlayEntry"); };
     const onDeselectAllClick = () => {
@@ -44,8 +47,16 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
             return;
         }
 
-        guess(selected, values, correctSoFar, mistakesRemaining, setCorrectSoFar, setIsOneAway, setSelected, setOrder, setMistakesRemaining);
-    }, [canSelectSubmitButton, correctSoFar, mistakesRemaining, selected, values]);
+        if (guesses.includes(getGuessString(selected, values, correctSoFar))) {
+            setShouldShowAlreadyGuessedError(true);
+            setTimeout(() => {
+                setShouldShowAlreadyGuessedError(false);
+            }, 2000);
+            return;
+        }
+
+        guess(selected, values, correctSoFar, mistakesRemaining, guesses, setCorrectSoFar, setIsOneAway, setSelected, setOrder, setMistakesRemaining, setGuesses);
+    }, [canSelectSubmitButton, correctSoFar, mistakesRemaining, guesses, selected, values]);
     const onRevealAnswersClick = useCallback(() => {
         setHaveanswersBeenRevealed(true);
         let delay = 0;
@@ -88,6 +99,7 @@ export const GameDisplay: React.FC<IGameDisplayProps> = props => {
             {isOneAway && <span className="_saveErrorMessage">One away!</span>}
             <VerticalSpacer height={3} />
             {shouldShowSubmittedError && <span className="_saveErrorMessage">You must select four values to submit.</span>}
+            {shouldShowAlreadyGuessedError && <span className="_saveErrorMessage">Already guessed!</span>}
         </div>
     );
 }
